@@ -20,9 +20,11 @@ I am also very interested in how decentralized networks work and how anonymity c
 
 
 
-## 📬 Connect with Me
+Contact me with Telegram to get fast response.
+[![Telegram](https://img.shields.io/badge/Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)][Telegram]
+&nbsp;
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)][LinkedIn]
-&nbsp;[![Telegram](https://img.shields.io/badge/Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)][Telegram]
+
 
 
 
