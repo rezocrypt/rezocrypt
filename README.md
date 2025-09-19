@@ -6,12 +6,8 @@
 **`Systems Engineer | Everything is a System`**
 
 ## 📬 Connect with Me
-[![Telegram](https://img.shields.io/badge/Telegram-@yourhandle-26A5E4?style=flat&logo=telegram)](https://t.me/yourhandle)  
-[![Instagram](https://img.shields.io/badge/Instagram-@yourhandle-E1306C?style=flat&logo=instagram)](https://instagram.com/yourhandle)  
-[![MonkeyType](https://img.shields.io/badge/MonkeyType-@yourhandle-FFD600?style=flat&logo=keyboard)](https://monkeytype.com/profile/yourhandle)  
-[![Email](https://img.shields.io/badge/Email-your.email@gmail.com-D14836?style=flat&logo=gmail)](mailto:your.email@gmail.com)
-
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)][LinkedIn]
+&nbsp;[![Telegram](https://img.shields.io/badge/Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)][Telegram]
 
 I have been inspired by software and hardware design from an early age. However, I never accepted it as a profession; instead, I chose to remain free. Later, I became fascinated by the idea of "analogy," and after exploring a large number of them, I realized that everything is a system (hardware and software design are just beautiful examples of this).
 
@@ -29,4 +25,12 @@ Feel free to ask me any questions from the topics mentioned below in interests.
 - 🌐 Network Engineering
 - 🐧 Linux 
 - 🖥️ Software Design  
-- 📐 Mathematics  
+- 📐 Mathematics
+
+
+
+<!-- Outbound -->
+
+[Telegram]: https://t.me/rezocrypt
+[LinkedIn]: https://www.linkedin.com/in/rezocrypt/
+
