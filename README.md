@@ -1,6 +1,6 @@
 # 🏄‍♂️ Rezocrypt
 
-**`System Engineer (and everything is a System)`**
+**`System Engineer [and everything is a System]`**
 
 I have been inspired by software and hardware design from an early age. However, I never accepted it as a profession; instead, I chose to remain free. Later, I became fascinated by the idea of "analogy," and after exploring a large number of them, I realized that everything is a system (hardware and software design are just beautiful examples of this).
 
