@@ -28,10 +28,9 @@ Contact me on Telegram for the fastest response.
 &nbsp;
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)][LinkedIn]
 &nbsp;
-[![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)][X]
+[![MonkeyType](https://img.shields.io/badge/MonkeyType-FFD600?style=for-the-badge&logo=keyboard&logoColor=white)](https://monkeytype.com/profile/yourhandle)
 
-[![MonkeyType](https://img.shields.io/badge/MonkeyType-@yourhandle-FFD600?style=flat&logo=keyboard)](https://monkeytype.com/profile/yourhandle)  
-[![Email](https://img.shields.io/badge/Email-your.email@gmail.com-D14836?style=flat&logo=gmail)](mailto:your.email@gmail.com)
+
 
 
 
