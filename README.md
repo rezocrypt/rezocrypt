@@ -26,12 +26,14 @@ Contact me on Telegram for the fastest response.
 
 [![Telegram](https://img.shields.io/badge/Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)][Telegram]
 &nbsp;
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)[Email]
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)][Email]
 &nbsp;
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)][LinkedIn]
 &nbsp;
 [![MonkeyType](https://img.shields.io/badge/MonkeyType-FFD600?style=for-the-badge&logo=keyboard&logoColor=white)][MonkeyType]
 &nbsp;
+
+
 
 
 
