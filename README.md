@@ -22,7 +22,7 @@ I am also very interested in how decentralized networks work and how anonymity c
 
 Contact me on Telegram for the fastest response.
 
-<hr>
+<br>
 
 [![Telegram](https://img.shields.io/badge/Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)][Telegram]
 &nbsp;
@@ -50,7 +50,7 @@ Contact me on Telegram for the fastest response.
 - 🐧 Linux 
 - 🕵️ Darknets  
 
-<br>
+<hr>
 
 ## ✦ Hobbies
 - 📖 Reading  
