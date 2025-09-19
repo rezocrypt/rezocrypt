@@ -20,12 +20,15 @@ I am also very interested in how decentralized networks work and how anonymity c
 
 
 
-Contact me with Telegram to get fast response.
+Contact me on Telegram for the fastest response.
+
 <br>
 
 [![Telegram](https://img.shields.io/badge/Telegram-24A1DE?style=for-the-badge&logo=telegram&logoColor=white)][Telegram]
 &nbsp;
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)][LinkedIn]
+&nbsp;
+[![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)][X]
 
 
 
@@ -50,5 +53,6 @@ Contact me with Telegram to get fast response.
 <!-- Outbound -->
 
 [Telegram]: https://t.me/rezocrypt
-[LinkedIn]: https://www.linkedin.com/in/rezocrypt/
+[LinkedIn]: https://www.linkedin.com/in/rezocrypt
+[X]: https://x.com/rezocrypt
 
