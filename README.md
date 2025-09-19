@@ -36,11 +36,6 @@ Contact me on Telegram for the fastest response.
 
 <br>
 
-### 💻 Currently Contributing To
-
-[![XaoS](https://img.shields.io/badge/XaoS-FF6F00?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xaos-project/xaos)  
-*Fractal visualization software with GPU acceleration and deep zoom support.*
-
 
 ### 🛠 Specializations
 - 🌐 Network Engineering
@@ -49,7 +44,7 @@ Contact me on Telegram for the fastest response.
 - 🐧 Linux 
 - 🕵️ Darknets
 
-## 💻 Currently Contributing To
+### 💻 Currently Contributing To
 - [XaoS](https://github.com/xaos-project/xaos) – Fractal visualization software 
 
 ### ✦ Hobbies
