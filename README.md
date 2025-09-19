@@ -6,7 +6,7 @@
 
 <br>
 
-**`Systems Engineer | Everything is a System`**
+**`Systems Engineer - Everything is a System`**
 
  <br>
 
