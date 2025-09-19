@@ -72,9 +72,6 @@ Contact me on Telegram for the fastest response.
 
 
 
-[![Tor](https://img.shields.io/badge/Tor-7D4698?logo=Tor-Browser&logoColor=white)](#)
-
-
 <!-- Outbound -->
 
 [Telegram]: https://t.me/rezocrypt
