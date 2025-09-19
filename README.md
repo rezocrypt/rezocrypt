@@ -44,7 +44,7 @@ Contact me on Telegram for the fastest response.
 - 🕵️ Darknets  
 
 
-## ✦ Hobbies
+### ✦ Hobbies
 - 📖 Reading  
 - 📐 Mathematics
 - ⌨️ Fast Typing  
