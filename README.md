@@ -1,4 +1,4 @@
-# 🏄‍♂️ Rezocrypt
+# 🌐 Rezocrypt
 
 **`System Engineer [and everything is a System]`**
 
