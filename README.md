@@ -55,6 +55,7 @@ Contact me on Telegram for the fastest response.
 - 🕶️ Anonymity  
 - 🎧 Podcasts
 
+
 ### 🛠️ Technologies
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) &nbsp;
@@ -64,7 +65,10 @@ Contact me on Telegram for the fastest response.
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white) &nbsp;
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) &nbsp;
 ![Tor](https://img.shields.io/badge/Tor-8A2BE2?style=for-the-badge&logo=torproject&logoColor=white) &nbsp;
-![I2P](https://img.shields.io/badge/I2P-FF6600?style=for-the-badge&logoColor=white)
+![I2P](https://img.shields.io/badge/I2P-FF6600?style=for-the-badge&logoColor=white) &nbsp;
+![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white) &nbsp;
+![OSINT](https://img.shields.io/badge/OSINT-4B0082?style=for-the-badge&logoColor=white)
+
 
 
 
