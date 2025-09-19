@@ -38,6 +38,9 @@ I am also very interested in how decentralized networks work and how anonymity c
 - 🖥️ Software Design  
 - 📐 Mathematics
 
+## Technologies
+
+[![Tor](https://img.shields.io/badge/Tor-7D4698?logo=Tor-Browser&logoColor=white)](#)
 
 
 <!-- Outbound -->
