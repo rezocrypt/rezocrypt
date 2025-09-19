@@ -1,16 +1,21 @@
-## Hi there 👋
+# 🏄‍♂️ Rezocrypt
 
-<!--
-**rezocrypt/rezocrypt** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**`System Engineer (and everything is a System)`**
 
-Here are some ideas to get you started:
+I have been inspired by software and hardware design from an early age. However, I never accepted it as a profession; instead, I chose to remain free. Later, I became fascinated by the idea of "analogy," and after exploring a large number of them, I realized that everything is a system (hardware and software design are just beautiful examples of this).
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Additionally, the idea of open source inspired me, and I decided to contribute because, as the saying goes, “Individually, we are one drop. Together, we are an ocean.”
+
+I am also very interested in how decentralized networks work and how anonymity can emerge within darknets. I have spent a lot of time understanding how these networks function, including I2P, Tor, and similar systems.
+
+Feel free to ask me any questions from the topics mentioned below in interests.
+
+
+## 🔥 Interests
+- 🕵️ Darknets  
+- 🗂️ OSINT
+- 💰 Cryptocurrencies  
+- 🌐 Network Engineering
+- 🐧 Linux 
+- 🖥️ Software Design  
+- 📐 Mathematics  
