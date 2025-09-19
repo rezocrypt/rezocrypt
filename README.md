@@ -47,6 +47,7 @@ Contact me on Telegram for the fastest response.
 ### ✦ Hobbies
 - 📖 Reading  
 - 📐 Mathematics
+- 🔒 Cryptography
 - ⌨️ Fast Typing  
 - 🕶️ Anonymity  
 - 🎧 Podcasts
