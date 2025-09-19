@@ -43,7 +43,7 @@ Contact me on Telegram for the fastest response.
 
 
 
-## 🔥 Interests
+### 🛠 Specializations
 - 🕵️ Darknets  
 - 🗂️ OSINT
 - 💰 Cryptocurrencies  
@@ -52,7 +52,14 @@ Contact me on Telegram for the fastest response.
 - 🖥️ Software Design  
 - 📐 Mathematics
 
-## Technologies
+<br>
+
+## 🎯 Hobbies
+- 📖 Reading  
+- ⌨️ Fast Typing  
+- 🕶️ Anonymity  
+- 🎧 Podcasts
+
 
 [![Tor](https://img.shields.io/badge/Tor-7D4698?logo=Tor-Browser&logoColor=white)](#)
 
