@@ -44,18 +44,17 @@ Contact me on Telegram for the fastest response.
 
 
 ### 🛠 Specializations
-- 🕵️ Darknets  
-- 🗂️ OSINT
-- 💰 Cryptocurrencies  
 - 🌐 Network Engineering
-- 🐧 Linux 
 - 🖥️ Software Design  
-- 📐 Mathematics
+- 🗂️ OSINT
+- 🐧 Linux 
+- 🕵️ Darknets  
 
 <br>
 
-## 🎯 Hobbies
+## ✦ Hobbies
 - 📖 Reading  
+- 📐 Mathematics
 - ⌨️ Fast Typing  
 - 🕶️ Anonymity  
 - 🎧 Podcasts
