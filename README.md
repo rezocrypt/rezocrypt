@@ -1,6 +1,7 @@
 # 🌐 Rezocrypt
 
-🌐
+> ⚠️ **Note:** ‘Crypt’ in the username refers to cryptography, not to shady crypto trading or scamming.
+
 
 **`Systems Engineer [and everything is a System]`**
 
