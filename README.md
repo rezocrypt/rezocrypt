@@ -9,7 +9,6 @@
 **`Systems Engineer | Everything is a System`**
 
  <br>
-![XaoS Logo](https://raw.githubusercontent.com/xaos-project/xaos/master/logo.png)
 
 
 
@@ -48,8 +47,10 @@ Contact me on Telegram for the fastest response.
 - 🖥️ Software Design  
 - 🗂️ OSINT
 - 🐧 Linux 
-- 🕵️ Darknets  
+- 🕵️ Darknets
 
+## 💻 Currently Contributing To
+- [XaoS](https://github.com/xaos-project/xaos) – Fractal visualization software 
 
 ### ✦ Hobbies
 - 📖 Reading  
