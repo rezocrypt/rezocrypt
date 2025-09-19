@@ -16,7 +16,7 @@ I have been inspired by software and hardware design from an early age. However,
 
 Additionally, the idea of open source inspired me, and I decided to contribute because, as the saying goes, “Individually, we are one drop. Together, we are an ocean.”
 
-I am also very interested in how decentralized networks work and how anonymity can emerge within darknets. I have spent a lot of time understanding how these networks function, including I2P, Tor, and similar systems.
+I am also very interested in how decentralized networks work and how anonymity can emerge within darknets. I have spent a lot of time understanding how these networks function, including I2P, Tor, and similar systems. Feel free to ask me any questions from the topics mentioned below in interests and hobbies.
 
 
 
@@ -27,7 +27,7 @@ I am also very interested in how decentralized networks work and how anonymity c
 
 
 
-Feel free to ask me any questions from the topics mentioned below in interests.
+
 
 ## 🔥 Interests
 - 🕵️ Darknets  
