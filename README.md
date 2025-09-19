@@ -59,7 +59,7 @@ Contact me on Telegram for the fastest response.
 
 [Telegram]: https://t.me/rezocrypt
 [LinkedIn]: https://www.linkedin.com/in/rezocrypt
-[Email]: mailto:rezocrypt@gmail.com
+[Email]: https://google.com
 [MonkeyType]: https://monkeytype.com/profile/rezocrypt
 [X]: https://x.com/rezocrypt
 
