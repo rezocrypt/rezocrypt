@@ -73,10 +73,11 @@ Contact me on Telegram for the fastest response.
 
 
 <!-- Outbound -->
+<!-- You can just check me in every platform with username "rezocrypt" -->
 
 [Telegram]: https://t.me/rezocrypt
 [LinkedIn]: https://www.linkedin.com/in/rezocrypt
-[Email]: https://google.com
+[Email]: mailto:rezocrypt@gmail.com
 [MonkeyType]: https://monkeytype.com/profile/rezocrypt
 [X]: https://x.com/rezocrypt
 
