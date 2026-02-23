@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rezocrypt</title>
+  <meta name="description" content="Systems Engineer — Everything is a System" />
+  <link rel="icon" type="image/png" href="./logo.png" />
+  <style>
+    /* ----- THEME VARIABLES ----- */
+    :root{
+      --bg:#0b0d10;
+      --panel:#0f1217;
+      --text:#e9eef5;
+      --muted:#a6b1c2;
+      --line:#2a3342;
+      --accent:#7aa2ff;
+      --chip:#121826;
+      --max:980px;
+      --r:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font:15px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+
+    /* ----- BACKGROUND SYSTEM ----- */
+
+    /* Full-page fixed background layers (no restart on scroll) */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:-4;
+      background: radial-gradient(1200px 800px at 25% 10%, rgba(122,162,255,.14), transparent 60%),
+                  radial-gradient(900px 650px at 85% 15%, rgba(120,255,214,.08), transparent 55%),
+                  radial-gradient(1000px 700px at 70% 90%, rgba(255,122,219,.06), transparent 60%),
+                  var(--bg);
+      transform: translateZ(0);
+    }
+    .bg::before{
+      content:"";
+      position:absolute;
+      inset:-30vmax;
+      background:
+        radial-gradient(circle at 40% 40%, rgba(122,162,255,.08), transparent 55%);
+      filter: blur(60px);
+      opacity:.35;
+      animation:none;
+    }
+
+    /* Subtle noise to avoid banding */
+    .noise{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      opacity:.04;
+    }
+
+    /* Subtle mouse-based brightening (natural, minimal) */
+    .hoverlight{
+      position:fixed;
+      inset:-20vmax;
+      z-index:-3;
+      pointer-events:none;
+      background:
+        radial-gradient(700px 500px at var(--lx, 55vw) var(--ly, 35vh), rgba(122,162,255,.06), transparent 70%);
+      filter: blur(70px);
+      opacity: var(--lo, .12);
+      transition: opacity .4s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .bg::before{animation:none}
+      .hoverlight{display:none}
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:40px 18px 80px}
+    /* ----- HEADER BLOCK ----- */
+    header{
+      position:relative;
+      display:flex; gap:18px; align-items:flex-start; justify-content:space-between;
+      padding:22px 20px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(18, 24, 38, .54);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-radius:var(--r);
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+    }
+    header:hover{border-color: rgba(255,255,255,.14)}
+    .identity{display:flex; gap:14px; align-items:center}
+    .avatar{
+      width:78px; height:78px;
+      border-radius:999px;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 32px rgba(0,0,0,.45);
+      background: rgba(255,255,255,.06);
+      cursor:pointer;
+    }
+    .title h1{margin:0 0 10px 0; font-size:22px; letter-spacing:.2px}
+    .title .username{font-weight:700; color:var(--text)}
+    .title .realname{font-weight:400; color:var(--muted)}
+    .title .note{margin-top:10px; font-size:13px; color:var(--muted)}
+    .liquid-title{
+      margin-top:14px;
+      padding:5px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(18, 24, 38, .38);
+      backdrop-filter: blur(8px) saturate(130%);
+      -webkit-backdrop-filter: blur(8px) saturate(130%);
+      box-shadow: 0 4px 12px rgba(0,0,0,.18);
+      display:inline-block;
+    }
+    .liquid-title .mono{
+      margin:0;
+      font-size:13px;
+      color:var(--text);
+      opacity:.9;
+    }
+    .title p{margin:4px 0 0; color:var(--muted)}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--text);
+      text-decoration:none;
+      position:relative;
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+    .btn:hover{border-color:#2a3445; text-decoration:none}
+    .iconbtn{padding:9px 10px}
+    .ico{width:18px; height:18px; display:block; color: rgba(233,238,245,.92)}
+    .iconbtn:hover .ico{color: var(--text)}
+    .sr{
+      position:absolute;
+      width:1px; height:1px;
+      padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0);
+      white-space:nowrap; border:0;
+    }
+    nav{
+      margin:18px 0 0;
+      display:flex; flex-wrap:wrap; gap:10px;
+      padding:10px 4px 0;
+    }
+    .pill{
+      padding:7px 10px;
+      border:1px solid var(--line);
+      background:rgba(18,24,38,.55);
+      border-radius:999px;
+      color:var(--muted);
+      text-decoration:none;
+      transition: border-color .18s ease, background .18s ease, color .18s ease, transform .18s ease;
+    }
+    .pill:hover{color:var(--text); border-color:#2a3445; text-decoration:none}
+    .pill:focus-visible{outline:2px solid rgba(122,162,255,.35); outline-offset:2px}
+        section.flash{
+      border-color: rgba(122,162,255,.22);
+      box-shadow: 0 0 0 1px rgba(122,162,255,.14), 0 16px 36px rgba(0,0,0,.28);
+    }
+    main{margin-top:26px; display:grid; grid-template-columns: 1.2fr .8fr; gap:18px}
+    .stack > section + section{margin-top:18px}
+    @media (max-width: 920px){
+      main{grid-template-columns:1fr}
+      .actions{justify-content:flex-start}
+    }
+    section{
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(18, 24, 38, .52);
+      border-radius:var(--r);
+      padding:18px 18px 14px;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+      transform: translateZ(0);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    /* Liquid-glass sheen */
+    section::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 280px at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.05), transparent 75%),
+        radial-gradient(560px 360px at var(--mx, 50%) var(--my, 50%), rgba(122,162,255,.04), transparent 80%);
+      opacity:.0;
+      transition: opacity .22s ease;
+      pointer-events:none;
+    }
+    section::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(255,255,255,.08), transparent 40%, rgba(255,255,255,.04));
+      opacity:.06;
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+    section:hover{
+      border-color: rgba(255,255,255,.14);
+      transform: translateY(-2px);
+      background: rgba(18, 24, 38, .62);
+    }
+    section:hover::before{opacity:1}
+
+        section h2{
+      position:relative;
+      margin:0 0 14px;
+      font-size:15px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#e6edf7;
+      font-weight:600;
+      padding-bottom:8px;
+    }
+    section h2::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:42px;
+      height:2px;
+      background:linear-gradient(90deg, var(--accent), rgba(122,162,255,.25));
+      border-radius:2px;
+      opacity:.85;
+    }
+    .p{color:var(--muted); margin:0 0 10px}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    li{margin:6px 0}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .chip{
+      padding:6px 10px;
+      background:rgba(18,24,38,.75);
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .item{padding:12px 0; border-top:1px solid rgba(255,255,255,.14)}
+
+    /* ----- CONTRIBUTIONS GRID ----- */
+    /* Contribution logos grid */
+    .contrib-logos{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap:16px;
+      margin-top:14px;
+    }
+    .contrib-card{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:18px;
+      border-radius:14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      cursor:pointer;
+      overflow:hidden;
+    }
+    /* Background image layer (blurred + subtle) */
+    .contrib-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: var(--contrib-bg);
+      background-size: cover;
+      background-position: center;
+      filter: blur(18px) saturate(1.15) brightness(.75);
+      opacity:.28;
+      transform: scale(1.12);
+      pointer-events:none;
+    }
+    /* Soft glass overlay */
+    .contrib-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(255,255,255,.08), transparent 55%, rgba(255,255,255,.03));
+      opacity:.45;
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+    .contrib-card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.05);
+    }
+    /* Foreground logo container (separated) */
+    .contrib-logo{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:14px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(11,13,16,.55);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+    }
+    .contrib-logo img{
+      max-width:100%;
+      max-height:70px;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      filter: brightness(0.96) contrast(1.05);
+    }
+
+    /* ----- CERTIFICATE THUMBNAILS ----- */
+    /* Volunteer certificate thumbnails (minimalistic) */
+    .cert-card{
+      width:100%;
+      margin-top:8px;
+      padding:0;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+      cursor:pointer;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .cert-card:hover{
+      border-color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+    }
+    .cert-thumb{
+      width:100%;
+      height:140px;
+      display:block;
+      object-fit:cover;
+      background: rgba(0,0,0,.25);
+    }
+    .item:first-of-type{border-top:0; padding-top:0}
+    .item .top{
+      display:flex; gap:12px; align-items:baseline; justify-content:space-between; flex-wrap:wrap;
+    }
+    .item .role{
+      color:var(--text);
+      font-weight:600;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+    .item .meta{color:var(--muted); font-size:13px}
+    .kvs{display:grid; gap:8px; margin-top:8px}
+    .kv{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.08)}
+    .k{color:#cdd6e6; min-width:92px}
+    .strong{font-weight:600; color:var(--text)}
+    #personal .k{color:var(--muted); font-size:13px; letter-spacing:.08em; text-transform:uppercase}
+    #personal .v{color:var(--text)}
+    #personal .kv:last-child{border-bottom:0}
+
+    /* ----- PERSONAL: LANGUAGES (MINIMAL LIST) ----- */
+    .lang-list{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:6px;
+      margin-top:6px;
+    }
+    .lang-row{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:12px;
+      padding:2px 0;
+    }
+    .lang-name{
+      color:var(--text);
+      font-size:14px;
+    }
+    .lang-level{
+      color:var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+      letter-spacing:.02em;
+    }
+
+    footer{margin-top:18px; color:var(--muted); font-size:13px; text-align:center}
+    .small{font-size:13px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+
+    /* ----- MEDIA MODAL ----- */
+    /* Certificate modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index:999;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+    }
+    .modal.active{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .modal-content{
+      position:relative;
+      max-width:90vw;
+      max-height:90vh;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.6);
+      background:#0f1217;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .modal-content img{
+      display:block;
+      max-width:100%;
+      max-height:90vh;
+      object-fit:contain;
+    }
+    .modal-close{
+      position:absolute;
+      top:8px;
+      right:10px;
+      font-size:22px;
+      color:#fff;
+      cursor:pointer;
+      background:rgba(0,0,0,.55);
+      border-radius:50%;
+      width:32px;
+      height:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .modal-close:hover{background:rgba(0,0,0,.8)}
+  </style>
+</head>
+
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="hoverlight" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="identity">
+        <img id="avatar" class="avatar" src="./logo.png" alt="Profile" data-media-src="./logo.png" data-media-alt="Profile" />
+        <div class="title">
+          <h1 id="name"><span class="username">Rezocrypt</span> <span class="realname">(Davit Harutyunyan)</span></h1>
+        <p class="note">⚠️ Note: ‘Crypt’ in the username refers to cryptography, not to shady crypto trading or scamming.</p>
+          <div class="liquid-title">
+            <p id="tagline" class="mono">Systems Engineer — Everything is a System</p>
+          </div>
+              </div>
+      </div>
+      <div class="actions">
+        <a id="btn-telegram" class="btn iconbtn" href="https://t.me/rezocrypt" target="_blank" rel="noreferrer" aria-label="Telegram">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 5.6c.3-1.2-.5-2-1.6-1.6L3.1 10.6c-1.2.5-1.2 1.3-.2 1.6l4.5 1.4 1.7 5.2c.2.6.1.9.7.9.5 0 .8-.2 1.1-.5l2.2-2.1 4.6 3.4c.9.5 1.5.2 1.7-.8L21.9 5.6Zm-16 7.6 12.7-7.9c.6-.4 1.1-.2.7.2L8.8 14.7l-.4 4.1c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c.4.2.7.1.8-.4l2.3-13.5c.1-.6-.2-.8-.7-.6L5.9 13.2Z"/></svg>
+          <span class="sr">Telegram</span>
+        </a>
+        <a id="btn-github" class="btn iconbtn" href="https://github.com/rezocrypt" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.7.5.6 5.7.6 12.1c0 5.1 3.3 9.5 7.9 11 .6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.8 1.8 2.9 1.3.1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2 1-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.6-2.7 5.6-5.3 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.9 7.9-11C23.4 5.7 18.3.5 12 .5Z"/></svg>
+          <span class="sr">GitHub</span>
+        </a>
+        <a id="btn-email" class="btn iconbtn" href="mailto:rezocrypt@gmail.com" aria-label="Email">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
+          <span class="sr">Email</span>
+        </a>
+      </div>
+    </header>
+
+    <nav>
+      <a class="pill" href="#about">About</a>
+      <a class="pill" href="#contact">Contact</a>
+      <a class="pill" href="#personal">Personal</a>
+      <a class="pill" href="#work">Work</a>
+      <a class="pill" href="#projects">Projects</a>
+      <a class="pill" href="#education">Education</a>
+      <a class="pill" href="#specializations">Specializations</a>
+      <a class="pill" href="#tools">Tools</a>
+      <a class="pill" href="#hobbies">Hobbies</a>
+      <a class="pill" href="#achievements">Achievements</a>
+      <a class="pill" href="#learning">Unformal Education</a>
+      <a class="pill" href="#contrib">Contributions</a>
+      <a class="pill" href="#vol">Volunteerings</a>
+    </nav>
+
+    <main>
+      <!-- LEFT COLUMN -->
+      <div class="stack">
+        <section id="about">
+          <h2>About</h2>
+          <div id="about_list"></div>
+        </section>
+
+        <section id="education">
+          <h2>Formal Education</h2>
+          <div id="education_list"></div>
+        </section>
+
+        <section id="work">
+          <h2>Work Experience</h2>
+          <div id="work_list"></div>
+        </section>
+
+        <section id="projects">
+          <h2>Projects</h2>
+          <div id="projects_list"></div>
+        </section>
+
+        <section id="specializations">
+          <h2>Specializations</h2>
+          <div id="specializations_list"></div>
+        </section>
+
+        <section id="achievements">
+          <h2>Achievements</h2>
+          <div id="achievements_list"></div>
+        </section>
+
+        <section id="contrib">
+          <h2>Contributions</h2>
+          <div id="contrib_list"></div>
+        </section>
+
+        <section id="vol">
+          <h2>Volunteerings</h2>
+          <div id="vol_list"></div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="stack">
+        <section id="contact">
+          <h2>Contact</h2>
+          <div id="contact_box"></div>
+        </section>
+
+        <section id="personal">
+          <h2>Personal</h2>
+          <div id="personal_box"></div>
+        </section>
+
+        <section id="tools">
+          <h2>Tools</h2>
+          <div id="tools_chips" class="chips"></div>
+        </section>
+
+        <section id="learning">
+          <h2>Unformal Education</h2>
+          <div id="learning_list"></div>
+        </section>
+
+        <section id="hobbies">
+          <h2>Hobbies</h2>
+          <ul id="hobbies_list"></ul>
+        </section>
+      </div>
+    </main>
+
+
+  <div id="imgModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-close" id="modalClose">×</div>
+      <img id="modalImg" src="" alt="Certificate" />
+    </div>
+  </div>
+
+  </div>
+
+<script src="./db.js"></script>
+<script>
+  // Render from external db.js
+  // ----- MAIN RENDER ENGINE -----
+  (function(){
+    const db = window.DB;
+    if (!db){
+      console.error('DB not found: window.DB (check db.js load/order)');
+      return;
+    }
+
+    const $ = (id) => document.getElementById(id);
+
+        // ----- addItem(): create standard row -----
+    function addItem(container, title, meta, desc){
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.innerHTML = `
+        <div class="top">
+          <div class="role"></div>
+          <div class="meta"></div>
+        </div>
+        ${desc ? `<p class="p small" style="margin-top:6px"></p>` : ''}
+      `;
+      item.querySelector('.role').textContent = title || '';
+      item.querySelector('.meta').textContent = meta || '';
+      if (desc){
+        item.querySelector('p').textContent = desc;
+      }
+      container.appendChild(item);
+    }
+
+        // ----- addItemWithMedia(): row with optional media -----
+    function addItemWithMedia(container, title, meta, desc, mediaSrc, mediaAlt){
+      const item = document.createElement('div');
+      item.className = 'item';
+      const media = mediaSrc ? `
+        <button class="cert-card" type="button" aria-label="Open media: ${title || 'item'}">
+          <img class="cert-thumb" src="${mediaSrc}" alt="${mediaAlt || title || 'Certificate'}" data-media-src="${mediaSrc}" data-media-alt="${mediaAlt || title || ''}" />
+        </button>
+      ` : '';
+      item.innerHTML = `
+        <div class="top">
+          <div class="role"></div>
+          <div class="meta"></div>
+        </div>
+        ${media}
+        ${desc ? `<p class="p small" style="margin-top:10px"></p>` : ''}
+      `;
+      item.querySelector('.role').textContent = title || '';
+      item.querySelector('.meta').textContent = meta || '';
+      if (desc){
+        item.querySelector('p').textContent = desc;
+      }
+      container.appendChild(item);
+
+      // thumbnail fit fix (portrait => contain)
+      if (mediaSrc){
+        const img = item.querySelector('img[data-media-src]');
+        if (img){
+          const onLoad = () => {
+            const ratio = img.naturalHeight / Math.max(1, img.naturalWidth);
+            const portrait = ratio > 1.15;
+            img.style.objectFit = portrait ? 'contain' : 'cover';
+            img.style.background = portrait ? 'rgba(0,0,0,.35)' : 'rgba(0,0,0,.20)';
+          };
+          if (img.complete) onLoad();
+          else img.addEventListener('load', onLoad, { once:true });
+        }
+      }
+    }
+
+        // ----- HEADER DATA BINDING -----
+    // Header
+    if (db.profile){
+      const a = $('avatar');
+      if (a && db.profile.avatar) a.src = db.profile.avatar;
+
+      const n = $('name');
+      if (n && db.profile.name){
+        const m = db.profile.name.match(/^([^\(]+)\s*(\(.*\))?$/);
+        if (m){
+          const user = (m[1] || '').trim();
+          const real = (m[2] || '').trim();
+          n.innerHTML = `<span class="username">${user}</span>${real ? ` <span class="realname">${real}</span>` : ''}`;
+        } else {
+          n.textContent = db.profile.name;
+        }
+      }
+
+      const t = $('tagline');
+      if (t && db.profile.headline) t.textContent = db.profile.headline;
+    }
+
+    if (db.contact){
+      const bt = $('btn-telegram'); if (bt && db.contact.telegram) bt.href = db.contact.telegram;
+      const bg = $('btn-github'); if (bg && db.contact.github) bg.href = db.contact.github;
+      const be = $('btn-email');
+      if (be && Array.isArray(db.contact.emails) && db.contact.emails[0]) be.href = `mailto:${db.contact.emails[0]}`;
+    }
+
+        // ----- LEFT COLUMN SECTIONS -----
+    // About
+    const aboutBox = $('about_list');
+    if (aboutBox && Array.isArray(db.about)){
+      aboutBox.innerHTML = '';
+      for (const p of db.about){
+        const el = document.createElement('p');
+        el.className = 'p';
+        el.textContent = p;
+        aboutBox.appendChild(el);
+      }
+    }
+
+    // Specializations
+    const specBox = $('specializations_list');
+    if (specBox && Array.isArray(db.specializations)){
+      specBox.innerHTML = '';
+      for (const s of db.specializations){
+        addItem(specBox, s.title, '', s.details);
+      }
+    }
+
+    // Work
+    const workBox = $('work_list');
+    if (workBox && Array.isArray(db.workExperience)){
+      workBox.innerHTML = '';
+      for (const w of db.workExperience){
+        addItem(
+          workBox,
+          `${w.company} — ${w.role}`,
+          w.dates,
+          w.description || ''
+        );
+      }
+    }
+
+    // Projects
+    const projBox = $('projects_list');
+    if (projBox && Array.isArray(db.projects)){
+      projBox.innerHTML = '';
+      for (const p of db.projects){
+        const item = document.createElement('div');
+        item.className = 'item';
+
+        const linkStart = p.url ? `<a href="${p.url}" target="_blank" rel="noreferrer" style="color:inherit; text-decoration:none;">` : '';
+        const linkEnd = p.url ? `</a>` : '';
+
+        item.innerHTML = `
+          <div class="top">
+            <div class="role">${linkStart}${p.name || ''}${linkEnd}</div>
+            <div class="meta">${p.dates || ''} · ${p.role || ''}</div>
+          </div>
+          ${p.description ? `<p class="p small" style="margin-top:6px"></p>` : ''}
+        `;
+
+        if (p.description){
+          item.querySelector('p').textContent = p.description;
+        }
+
+        projBox.appendChild(item);
+      }
+    }
+
+    // Achievements
+    const achBox = $('achievements_list');
+    if (achBox && Array.isArray(db.achievements)){
+      achBox.innerHTML = '';
+      for (const a of db.achievements){
+        addItem(achBox, a.name, a.dates, a.description);
+      }
+    }
+
+        // ----- CONTRIBUTIONS SECTION -----
+    // Contributions (logo + link)
+    const contribBox = $('contrib_list');
+    if (contribBox && Array.isArray(db.contributions)){
+      contribBox.innerHTML = '';
+      for (const c of db.contributions){
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.innerHTML = `
+          <div class="top">
+            <div class="role"></div>
+            <div class="meta"></div>
+          </div>
+          ${c.logo && c.url ? `
+            <a class="contrib-card" style="margin-top:10px; --contrib-bg: url('${c.logo}');" href="${c.url}" target="_blank" rel="noreferrer">
+              <div class="contrib-logo">
+                <img src="${c.logo}" alt="${c.name} logo" />
+              </div>
+            </a>
+          ` : ''}
+          <p class="p small" style="margin-top:10px"></p>
+        `;
+        item.querySelector('.role').textContent = c.name || '';
+        item.querySelector('.meta').textContent = c.what || '';
+        item.querySelector('p').textContent = c.did || '';
+        contribBox.appendChild(item);
+      }
+    }
+
+        // ----- VOLUNTEERINGS SECTION -----
+    // Volunteerings (cards from db; optional image path)
+    const volBox = $('vol_list');
+    if (volBox && Array.isArray(db.volunteerings)){
+      volBox.innerHTML = '';
+      for (const v of db.volunteerings){
+        const item = document.createElement('div');
+        item.className = 'item';
+        const img = v.image ? `
+          <button class="cert-card" type="button" aria-label="Open certificate: ${v.name}">
+            <img class="cert-thumb" src="${v.image}" alt="${v.name} certificate" data-media-src="${v.image}" />
+          </button>
+        ` : '';
+        item.innerHTML = `
+          <div class="top">
+            <div class="role"></div>
+            <div class="meta"></div>
+          </div>
+          ${img}
+          <p class="p small" style="margin-top:10px"></p>
+        `;
+        item.querySelector('.role').textContent = v.name || '';
+        item.querySelector('.meta').textContent = v.date || '';
+        item.querySelector('p').textContent = v.description || '';
+        volBox.appendChild(item);
+      }
+    }
+
+        // ----- RIGHT COLUMN SECTIONS -----
+    // Contact (right column)
+
+    const contactBox = $('contact_box');
+    if (contactBox && db.contact){
+      contactBox.innerHTML = '';
+      const kvs = document.createElement('div');
+      kvs.className = 'kvs';
+
+      const emails = Array.isArray(db.contact.emails) ? db.contact.emails : [];
+      if (emails[0]) kvs.innerHTML += `<div class="kv"><div class="k">Mail 1</div><div class="v"><a href="mailto:${emails[0]}">${emails[0]}</a></div></div>`;
+      if (emails[1]) kvs.innerHTML += `<div class="kv"><div class="k">Mail 2</div><div class="v"><a href="mailto:${emails[1]}">${emails[1]}</a></div></div>`;
+      if (db.contact.telegram) kvs.innerHTML += `<div class="kv"><div class="k">Telegram</div><div class="v"><a href="${db.contact.telegram}" target="_blank" rel="noreferrer">${db.contact.telegram.replace('https://','')}</a></div></div>`;
+      if (db.contact.github) kvs.innerHTML += `<div class="kv"><div class="k">GitHub</div><div class="v"><a href="${db.contact.github}" target="_blank" rel="noreferrer">${db.contact.github.replace('https://','')}</a></div></div>`;
+
+      contactBox.appendChild(kvs);
+      if (db.contact.note){
+        const note = document.createElement('p');
+        note.className = 'p small';
+        note.style.marginTop = '10px';
+        note.textContent = db.contact.note;
+        contactBox.appendChild(note);
+      }
+    }
+
+    // Personal (right column)
+    const personalBox = $('personal_box');
+    if (personalBox && db.personal){
+      personalBox.innerHTML = '';
+      const kvs = document.createElement('div');
+      kvs.className = 'kvs';
+
+      if (db.personal.fullName) kvs.innerHTML += `<div class="kv"><div class="k">Full Name</div><div class="v strong">${db.personal.fullName}</div></div>`;
+      if (db.personal.location) kvs.innerHTML += `<div class="kv"><div class="k">Location</div><div class="v">${db.personal.location}</div></div>`;
+      if (db.personal.age) kvs.innerHTML += `<div class="kv"><div class="k">Age</div><div class="v">${db.personal.age}</div></div>`;
+
+            // Languages: array of {name, level} or strings
+      if (Array.isArray(db.personal.languages) && db.personal.languages.length){
+        const row = document.createElement('div');
+        row.className = 'kv';
+        row.innerHTML = '<div class="k">Languages</div><div class="v"></div>';
+
+        const v = row.querySelector('.v');
+        const list = document.createElement('div');
+        list.className = 'lang-list';
+
+        db.personal.languages.forEach(l => {
+          let name = '';
+          let level = '';
+          if (typeof l === 'string'){
+            name = l;
+          } else if (l && typeof l === 'object'){
+            name = l.name || '';
+            level = l.level || '';
+          }
+          if (!name) return;
+
+                    const rowItem = document.createElement('div');
+          rowItem.className = 'lang-row';
+
+          const n = document.createElement('span');
+          n.className = 'lang-name';
+          n.textContent = name;
+          rowItem.appendChild(n);
+
+          const lvl = document.createElement('span');
+          lvl.className = 'lang-level';
+          lvl.textContent = level || '';
+          rowItem.appendChild(lvl);
+
+          list.appendChild(rowItem);
+        });
+
+        v.appendChild(list);
+        kvs.appendChild(row);
+      }
+
+      personalBox.appendChild(kvs);
+    }
+    // Tools (Shields.io badges, per-tool branding)
+    const toolsBox = $('tools_chips');
+    if (toolsBox && Array.isArray(db.tools)){
+      toolsBox.innerHTML = '';
+
+      // Tool name -> (label, color, logo, logoColor)
+      const TOOL_BADGES = {
+        'HTML5':      { label:'HTML5',      color:'E34F26', logo:'html5',        logoColor:'white' },
+        'CSS3':       { label:'CSS3',       color:'1572B6', logo:'css3',         logoColor:'white' },
+        'JavaScript': { label:'JavaScript', color:'F7DF1E', logo:'javascript',   logoColor:'black' },
+        'Javascript': { label:'JavaScript', color:'F7DF1E', logo:'javascript',   logoColor:'black' },
+        'NodeJS':     { label:'Node.js',    color:'339933', logo:'node.js',      logoColor:'white' },
+        'Node.js':    { label:'Node.js',    color:'339933', logo:'node.js',      logoColor:'white' },
+        'C':          { label:'C',          color:'A8B9CC', logo:'c',            logoColor:'black' },
+        'Linux':      { label:'Linux',      color:'FCC624', logo:'linux',        logoColor:'black' },
+        'Tor':        { label:'Tor',        color:'7D4698', logo:'tor-project',  logoColor:'white' },
+        'I2P':        { label:'I2P',        color:'111111', logo:'i2p',          logoColor:'white' },
+        'Bitcoin':    { label:'Bitcoin',    color:'F7931A', logo:'bitcoin',      logoColor:'white' },
+        'OSINT':      { label:'OSINT',      color:'4B5563', logo:'open-source-initiative', logoColor:'white' },
+        'RouterOS':   { label:'RouterOS',   color:'1F4B8F', logo:'mikrotik',     logoColor:'white' }
+      };
+
+      for (const raw of db.tools){
+        const key = String(raw || '').trim();
+        if (!key) continue;
+
+        const cfg = TOOL_BADGES[key] || {
+          label: key,
+          color: '111111',
+          logo: key.toLowerCase().split(' ').join('-'),
+          logoColor: 'white'
+        };
+
+        const a = document.createElement('a');
+        a.href = 'https://www.google.com/search?q=' + encodeURIComponent(cfg.label);
+        a.target = '_blank';
+        a.rel = 'noreferrer';
+        a.style.display = 'inline-flex';
+
+        const img = document.createElement('img');
+        img.src = 'https://img.shields.io/badge/'
+          + encodeURIComponent(cfg.label)
+          + '-'
+          + cfg.color
+          + '?logo='
+          + encodeURIComponent(cfg.logo)
+          + '&logoColor='
+          + encodeURIComponent(cfg.logoColor)
+          + '&style=for-the-badge';
+        img.alt = cfg.label;
+        img.loading = 'lazy';
+        img.style.height = '28px';
+        img.style.borderRadius = '6px';
+        img.style.margin = '4px 8px 4px 0';
+
+        a.appendChild(img);
+        toolsBox.appendChild(a);
+      }
+    }
+
+    // Hobbies list
+    const hobBox = $('hobbies_list');
+    if (hobBox && Array.isArray(db.hobbies)){
+      hobBox.innerHTML = '';
+      for (const h of db.hobbies){
+        const li = document.createElement('li');
+        li.textContent = `${h.title} — ${h.details}`;
+        hobBox.appendChild(li);
+      }
+    }
+
+    // Formal education
+    const eduBox = $('education_list');
+    if (eduBox && Array.isArray(db.formalEducation)){
+      eduBox.innerHTML = '';
+      for (const e of db.formalEducation){
+        addItem(
+          eduBox,
+          e.school,
+          e.dates,
+          e.description || ''
+        );
+      }
+    }
+
+    // Unformal education
+    const learnBox = $('learning_list');
+    if (learnBox && Array.isArray(db.unformalEducation)){
+      learnBox.innerHTML = '';
+      for (const u of db.unformalEducation){
+        // support optional certificate image
+        const mediaSrc = u.image || u.certificate || u.cert || '';
+        addItemWithMedia(
+          learnBox,
+          u.name,
+          u.dates,
+          u.description,
+          mediaSrc,
+          u.name ? (u.name + ' certificate') : 'Certificate'
+        );
+      }
+    }
+
+    // Enable liquid-glass hover sheen coordinates
+    const cards = Array.from(document.querySelectorAll('section'));
+    function setCardVars(e){
+      const el = e.currentTarget;
+      const r = el.getBoundingClientRect();
+      const mx = ((e.clientX - r.left) / r.width) * 100;
+      const my = ((e.clientY - r.top) / r.height) * 100;
+      el.style.setProperty('--mx', mx.toFixed(2) + '%');
+      el.style.setProperty('--my', my.toFixed(2) + '%');
+    }
+    cards.forEach(c => c.addEventListener('pointermove', setCardVars, {passive:true}));
+
+    // ----- NAV CLICK FEEDBACK (NO STICKY ACTIVE STATE) -----
+    const pills = Array.from(document.querySelectorAll('nav .pill'));
+
+    function flashSection(id){
+      const el = id ? document.getElementById(id) : null;
+      if (!el) return;
+      el.classList.add('flash');
+      window.clearTimeout(el.__flashT);
+      el.__flashT = window.setTimeout(() => el.classList.remove('flash'), 700);
+    }
+
+    // Smooth scroll + brief section highlight
+    pills.forEach(a => {
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href')?.slice(1);
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior:'smooth', block:'start' });
+        flashSection(id);
+        history.replaceState(null, '', '#' + id);
+      });
+    });
+
+    // If page is opened with a hash, highlight once
+    if (location.hash){
+      const id = location.hash.slice(1);
+      flashSection(id);
+    }
+  })();
+</script>
+
+<script>
+  // ----- MEDIA MODAL CONTROLLER -----
+  // Reusable media modal (images)
+  (function(){
+    const modal = document.getElementById('imgModal');
+    const closeBtn = document.getElementById('modalClose');
+    const modalImg = document.getElementById('modalImg');
+
+    if (!modal || !closeBtn || !modalImg) return;
+
+    function openMedia(src, alt){
+      if (!src) return;
+      modalImg.src = src;
+      modalImg.alt = alt || 'Media';
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMedia(){
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      modalImg.src = '';
+      modalImg.alt = 'Media';
+    }
+
+    // Close controls
+    closeBtn.addEventListener('click', closeMedia);
+    modal.addEventListener('click', (e)=>{
+      if (e.target === modal) closeMedia();
+    });
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape') closeMedia();
+    });
+
+    // Generic binder: click any element with data-media-src
+    document.addEventListener('click', (e)=>{
+      const el = e.target.closest('[data-media-src]');
+      if (!el) return;
+      if (window.getSelection && String(window.getSelection())) return;
+      e.preventDefault();
+      openMedia(
+        el.getAttribute('data-media-src'),
+        el.getAttribute('data-media-alt') || el.getAttribute('alt') || ''
+      );
+    });
+
+    // Optional API for future use
+    window.openMedia = openMedia;
+    window.closeMedia = closeMedia;
+  })();
+</script>
+
+<script>
+  // ----- BACKGROUND MOUSE LIGHT EFFECT -----
+  // Natural, minimal light: slow drift + fades when idle
+  (function(){
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    // Disable on coarse pointers (most touch devices)
+    const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (coarse) return;
+
+    const root = document.documentElement;
+    let tx = window.innerWidth * 0.55;
+    let ty = window.innerHeight * 0.35;
+    let x = tx, y = ty;
+    let lastMove = performance.now();
+
+    // Start slightly visible
+    root.style.setProperty('--lo', '.08');
+
+    window.addEventListener('pointermove', (e)=>{
+      tx = e.clientX;
+      ty = e.clientY;
+      lastMove = performance.now();
+      // slightly stronger while actively moving
+      root.style.setProperty('--lo', '.14');
+    }, {passive:true});
+
+    window.addEventListener('pointerleave', ()=>{
+      root.style.setProperty('--lo', '.12');
+    });
+
+    (function tick(){
+      // slower easing feels more “ambient”
+      x += (tx - x) * 0.07;
+      y += (ty - y) * 0.07;
+
+      root.style.setProperty('--lx', x.toFixed(0) + 'px');
+      root.style.setProperty('--ly', y.toFixed(0) + 'px');
+
+      // idle fade (after ~1.2s)
+      const idle = performance.now() - lastMove;
+      if (idle > 1200) root.style.setProperty('--lo', '.10');
+      if (idle > 3500) root.style.setProperty('--lo', '.10');
+
+      requestAnimationFrame(tick);
+    })();
+  })();
+</script>
+
+</body>
+</html>
